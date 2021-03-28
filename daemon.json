@@ -1,0 +1,16 @@
+
+{
+  "path": "/etc/docker/daemon.json"
+  , "mirrors": "https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors"
+  , "command": [
+    "sudo systemctl daemon-reload"
+    , "sudo systemctl restart docker"
+  ]
+
+  ,"registry-mirrors": [
+    "http://registry.docker-cn.com"
+    , "https://esjoty1m.mirror.aliyuncs.com"
+    , "https://reg-mirror.qiniu.com"
+    , "http://hub-mirror.c.163.com"
+  ]
+}

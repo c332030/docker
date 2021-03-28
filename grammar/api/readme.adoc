@@ -1,0 +1,30 @@
+
+= api
+
+systemctl daemon-reload
+systemctl restart docker
+
+== enable
+
+[source,shell script]
+----
+vim /etc/default/docker
+
+# DOCKER_OPTS="-H tcp://0.0.0.0:2375"
+
+----
+
+[source,shell script]
+----
+# /usr/lib/systemd/system/docker.service
+# ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+
+----
+
+[source,shell script]
+----
+vim /etc/docker/daemon.json
+
+# "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]
+
+----

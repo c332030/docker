@@ -1,0 +1,77 @@
+version: '3'
+services:
+  acme.sh:
+    image: neilpang/acme.sh
+    container_name: acme.sh
+    restart: always
+    command: daemon
+    environment:
+      - CF_Key="03b3xcddccccxxxxxxxx165c91cb"
+      - CF_Email="xxxxxx@gmail.com"
+    volumes:
+      - ./config/ssl:/acme.sh
+    network_mode: host
+  trojan:
+    image: trojangfw/trojan
+    container_name: trojan
+    volumes:
+      - ./config:/config
+    expose:
+      - "10066"
+    links:
+      - nginx:nginx
+    depends_on:
+      - acme.sh
+      - nginx
+    restart: unless-stopped
+  nginx:
+    image: nginx:stable-alpine
+    container_name: trojan_nginx
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./config/nginx/html:/usr/share/nginx/html
+      - ./config/nginx/AriaNg:/AriaNg
+      - ./config/nginx/log/nginx:/var/log/nginx
+      - ./config/ssl:/etc/v2ray
+    ports:
+      - "443:443"
+    restart: unless-stopped
+  v2ray:
+    image: v2ray/official
+    container_name: trojan_v2ray
+    volumes:
+      - ./config/v2ray:/etc/v2ray
+      - ./config/v2ray/log/v2ray:/var/log/v2ray
+    expose:
+      - "10010"
+    command: v2ray -config=/etc/v2ray/config.json
+    restart: unless-stopped
+  aria2-pro:
+    image: p3terx/aria2-pro
+    container_name: aria2-pro
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    network_mode: host
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+      - ./downloads:/srv
+      - ./filebrowser/database.db:/database.db
+    ports:
+      - "8181:80"
+    restart: always
+    depends_on:
+      - aria2-pro
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:  --cleanup --schedule "0 0 4 * * *"

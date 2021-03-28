@@ -1,0 +1,41 @@
+
+= host
+
+== 端口映射
+
+=== 共享主机网络（不需要映射）
+
+[source,shell script]
+----
+docker --net=host
+----
+
+=== 映射所有端口
+
+默认false
+[source,shell script]
+----
+docker --P
+docker --publish-all=true
+
+----
+
+=== 映射部分端口
+
+[source,shell script]
+----
+# docker -p []
+docker -p 80:80
+docker --publish 80:80
+
+----
+
+=== 暴露部分端口
+
+容器间访问
+[source,shell script]
+----
+# docker -p []
+docker --expose 80
+
+----

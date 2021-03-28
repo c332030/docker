@@ -1,0 +1,16 @@
+
+= docker command-line grammar
+
+== parameter
+
+- -d
+
+    后台运行
+
+- -e key=value
+
+    环境变量
+
+- -w $app_home
+
+    指定工作路径，即进入容器的默认路径

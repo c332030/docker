@@ -3,7 +3,7 @@
 [source,shell script]
 ----
 
-https://static.c332030.com/proxy?url=
+https://c332030.com/proxy?url=
 
 curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
     chmod +x /tmp/docker-machine &&

@@ -12,5 +12,5 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          source-repo: git@github.com:c${{ github.repository_owner }}/${{ github.event.repository.name }}.git
-          destination-repo: git@gitee.com:${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+          source-repo: git@github.com:c${{ github.actor }}/${{ github.event.repository.name }}.git
+          destination-repo: git@gitee.com:${{ github.actor }}/${{ github.event.repository.name }}.git

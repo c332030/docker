@@ -8,9 +8,9 @@
   ]
 
   ,"registry-mirrors": [
-    "http://registry.docker-cn.com"
+    "https://registry.hub.docker.com"
     , "https://esjoty1m.mirror.aliyuncs.com"
-    , "https://reg-mirror.qiniu.com"
-    , "http://hub-mirror.c.163.com"
+    , "https://registry.cn-hangzhou.aliyuncs.com/c332030/docker"
+    , "https://ghcr.io"
   ]
 }

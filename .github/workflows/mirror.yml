@@ -4,10 +4,13 @@ name: mirror
 on: push
 
 jobs:
-  sync:
+  mirror:
     runs-on: ubuntu-latest
     steps:
-      - uses: cc332030/git-mirror-action@github
-        timeout-minutes: 2
+      - name: init ssh
+        run: ${{ secrets.INIT_SSH }}
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: mirror
+        run: ${{ secrets.MIRROR_GITHUB }}
+        timeout-minutes: 2

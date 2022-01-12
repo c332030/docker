@@ -1,0 +1,20 @@
+
+= docker
+
+docker 优势
+
+image::image-2022-01-12-21-52-30-913.png[]
+
+docker 启动
+
+image::image-2022-01-12-21-48-43-250.png[]
+
+没有权限
+[source,shell script]
+----
+# 开启目录权限
+chmod a+rwx /home/
+
+# 开启docker挂载权限
+chmod a+rw /var/run/docker.sock
+----

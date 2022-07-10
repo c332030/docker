@@ -5,10 +5,6 @@ on: [push, pull_request]
 
 jobs:
   mirror:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: cc332030/init-ssh-action@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      - uses: cc332030/git-mirror-action@main
-        timeout-minutes: 2
+    uses: cc332030/git/.github/workflows/mirror.yml@master
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

@@ -5,6 +5,6 @@ on: [push, pull_request]
 
 jobs:
   mirror:
-    uses: cc332030/git-mirror-action/.github/workflows/mirror.yml@main
+    uses: cc332030/git/.github/workflows/mirror.yml@master
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

@@ -3,11 +3,14 @@ name: pull-and-push
 
 on:
   workflow_call:
+    inputs:
+      origin-image:
+        required: true
+        type: string
+      registry:
+        required: true
+        type: string
     secrets:
-      ORIGIN_IMAGE:
-        required: true
-      REGISTRY:
-        required: true
       USERNAME:
         required: true
       PASSWORD:
@@ -16,15 +19,15 @@ on:
         required: true
 
 jobs:
-  mirror:
-    name: mirror
+  pull-and-push:
+    name: pull-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: init-ssh-pre
+      - name: pull-and-push
         run: curl -sL https://github.com/cc332030/docker/raw/master/script/pull-and-push.sh | sudo sh
         env:
-          ORIGIN_IMAGE: ${{ secrets.ORIGIN_IMAGE }}
-          REGISTRY: ${{ secrets.REGISTRY }}
+          ORIGIN_IMAGE: ${{ inputs.origin-image }}
+          REGISTRY: ${{ inputs.registry }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           IMAGE_NAME: ${{ secrets.IMAGE_NAME }}

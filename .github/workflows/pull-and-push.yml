@@ -1,0 +1,30 @@
+
+name: pull-and-push
+
+on:
+  workflow_call:
+    secrets:
+      ORIGIN_IMAGE:
+        required: true
+      USERNAME:
+        required: true
+      PASSWORD:
+        required: true
+      REGISTRY:
+        required: true
+      IMAGE_NAME:
+        required: true
+
+jobs:
+  mirror:
+    name: mirror
+    runs-on: ubuntu-latest
+    steps:
+      - name: init-ssh-pre
+        run: curl -sL https://github.com/cc332030/docker/raw/master/script/pull-and-push.sh | sudo sh
+        env:
+          ORIGIN_IMAGE: ${{ secrets.ORIGIN_IMAGE }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          REGISTRY: ${{ secrets.REGISTRY }}
+          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}

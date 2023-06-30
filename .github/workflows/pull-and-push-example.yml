@@ -1,0 +1,24 @@
+
+name: deploy
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  deploy:
+    uses: cc332030/gradle/.github/workflows/deploy-image-dockerfile.yml@master
+    secrets:
+      REGISTRY_USERNAME: ${{ github.actor }}
+      REGISTRY_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+  push:
+    uses: cc332030/docker/.github/workflows/pull-and-push.yml@master
+    needs: [ deploy ]
+    with:
+      origin-image: ${{ github.actor }}/${{ github.event.repository.name }}:${{ github.ref_name }}
+      registry: ccr.ccs.tencentyun.com
+    secrets:
+      USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      IMAGE_NAME: tcb-${{ secrets.REGISTRY_USERNAME }}-ziss/ca-veuueivu_springboot-u66a:${{ github.event.repository.name }}-${{ github.ref_name }}

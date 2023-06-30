@@ -7,6 +7,7 @@ set -e
 echo "
 ORIGIN_IMAGE: ${ORIGIN_IMAGE}
 REGISTRY: ${REGISTRY}
+IMAGE_NAME: ${IMAGE_NAME}
 "
 
 docker pull ${ORIGIN_IMAGE}

@@ -18,5 +18,4 @@ docker push ${REGISTRY}/${IMAGE_NAME}
 
 docker logout ${REGISTRY}
 
-docker rmi ${ORIGIN_IMAGE}
-docker rmi ${REGISTRY}/${IMAGE_NAME}
+docker rmi ${ORIGIN_IMAGE} ${REGISTRY}/${IMAGE_NAME}

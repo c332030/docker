@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pull-and-push
-        run: curl -sL https://github.com/cc332030/docker/raw/master/script/pull-and-push.sh | sudo sh
+        run: curl -sL https://github.com/cc332030/docker/raw/master/script/pull-and-push.sh | sh
         env:
           ORIGIN_IMAGE: ${{ inputs.origin-image }}
           REGISTRY: ${{ inputs.registry }}

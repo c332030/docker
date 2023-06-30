@@ -18,4 +18,4 @@ docker push ${REGISTRY}/${IMAGE_NAME}
 
 docker logout ${REGISTRY}
 
-docker rmi ${ORIGIN_IMAGE} ${REGISTRY}/${IMAGE_NAME}
+docker system prune -af

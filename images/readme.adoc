@@ -1,0 +1,8 @@
+
+= docker image
+
+保存 image 为 tar
+[source,shell]
+----
+docker save -o image.tar <image>
+----

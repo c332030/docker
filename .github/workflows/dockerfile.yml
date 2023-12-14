@@ -53,6 +53,8 @@ jobs:
       -
         name: build-push
         uses: docker/build-push-action@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
           context: .
           push: true
